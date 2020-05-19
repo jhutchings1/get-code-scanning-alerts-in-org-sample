@@ -1,0 +1,17 @@
+{
+  "name": "get-code-scanning-alerts",
+  "version": "1.0.0",
+  "description": "Gets stats about code scanning alerts in an organization",
+  "main": "get-code-scanning-alerts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GitHub",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^17.0.1",
+    "delay": "^4.3.0",
+    "dotenv": "^8.2.0",
+    "p-reduce": "^2.1.0"
+  }
+}
