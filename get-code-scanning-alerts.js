@@ -14,7 +14,7 @@ var buffer = ""
 const [, , ...args] = process.argv
 const owner = args
 
-console.log("org,repo,tool,rule_id,severity,open,created_at,closed_by,closed_at,url")
+console.log("org,repo,tool,rule_id,severity,open,created_at,closed_by,closed_at,url,closed_reason")
 octokit
   .paginate(octokit.repos.listForOrg.endpoint.merge({org: owner}))
   .then(repositories =>
@@ -33,7 +33,7 @@ octokit
           if (alerts.length > 0) {
 
             pReduce(alerts, (alert) => {
-              console.log(`${owner},${repo},${alert.tool},${alert.rule_id},${alert.rule_severity},${alert.open},${alert.created_at},${alert.closed_by},${alert.closed_at},${alert.html_url}`)
+              console.log(`${owner},${repo},${alert.tool},${alert.rule_id},${alert.rule_severity},${alert.open},${alert.created_at},${alert.closed_by},${alert.closed_at},${alert.html_url},${alert.closed_reason}`)
             }) 
           } 
           delay(300);
