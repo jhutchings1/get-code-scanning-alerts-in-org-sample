@@ -12,11 +12,13 @@ const octokit = new Octokit({
 var buffer = ""
 
 const [, , ...args] = process.argv
-const owner = args
+const owner = args[0]
 
 console.log("org,repo,tool,rule_id,severity,open,created_at,closed_by,closed_at,url,closed_reason")
 octokit
-  .paginate(octokit.repos.listForOrg.endpoint.merge({org: owner}))
+  .paginate(octokit.repos.listForOrg, {
+      org: owner,
+    })
   .then(repositories =>
     pReduce(repositories, (repository) => {
       if (repository.archived) {
@@ -33,7 +35,7 @@ octokit
           if (alerts.length > 0) {
 
             pReduce(alerts, (alert) => {
-              console.log(`${owner},${repo},${alert.tool},${alert.rule_id},${alert.rule_severity},${alert.open},${alert.created_at},${alert.closed_by},${alert.closed_at},${alert.html_url},${alert.closed_reason}`)
+              console.log(`${owner},${repo},${alert.tool.name},${alert.rule.id},${alert.rule.severity},${alert.state},${alert.created_at},${alert.dismissed_by},${alert.dismissed_at},${alert.html_url},${alert.dismissed_reason}`)
             }) 
           } 
           delay(300);
@@ -45,7 +47,7 @@ octokit
     
   )
   .catch(error => {
-    /**console.error(`Getting repositories for organization ${owner} failed.
+    console.error(`Getting repositories for organization ${owner} failed.
     ${error.message} (${error.status})
-    ${error.documentation_url}`)**/
+    ${error.documentation_url}`)
   })

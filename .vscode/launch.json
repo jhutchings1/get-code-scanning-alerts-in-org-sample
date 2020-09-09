@@ -12,7 +12,7 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/get-code-scanning-alerts.js",
-      "args": "github"
+      "args": ["github"]
     }
   ]
 }

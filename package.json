@@ -9,8 +9,8 @@
   "author": "GitHub",
   "license": "MIT",
   "dependencies": {
-    "@octokit/rest": "^17.0.1",
-    "delay": "^4.3.0",
+    "@octokit/rest": "^17.11.2",
+    "delay": "^4.4.0",
     "dotenv": "^8.2.0",
     "p-reduce": "^2.1.0"
   }
